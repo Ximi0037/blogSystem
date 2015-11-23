@@ -1,0 +1,44 @@
+用户表
+blog_user{
+	uid  	mediumint(6)	用户ID
+	uname	varchar(50)	用户名
+	pwd	varchar(32)	用户密码
+	type		tinyint(2)	是否为管理员 1管理员 0普通用户
+	email		varchar(60)	EMAIL
+	loginip		varchar(15)	登录IP
+	logintime	int(10)		登录时间
+}
+
+栏目表
+blog_channel{
+	cid		tinyint(4)	栏目ID
+	ctitle		varchar(60)	栏目名称
+	isshow		tinyint(2)	是否是公共
+}
+
+博客表
+blog_blog{
+	bid		mediumint(8)	博客ID
+	btitle		varchar(60)	博客标题
+	content		text		博客内容
+	status		tinyint(2)	是否是公共
+	cid		tinyint(4)	栏目ID	
+}
+
+留言表
+blog_note{
+	nid		int		留言ID
+	uid		mediumint(6)	用户ID
+	ntime		int(10)		留言时间
+	npic		varchar(200)	留言的图标
+	status		tinyint(2)	是否仅博主可见
+	replay		tinyint(2)	是否已回复 1已回复 0没回复
+}
+
+回复表
+blog_reply{
+	rid		mediumint(6)	回复ID
+	nid		int		留言ID
+	reply_content	text		回复内容
+	reply_time	int(10)		回复时间
+}
