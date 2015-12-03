@@ -75,7 +75,15 @@ class APP{
 			case E_ERROR:
 			case E_USER_ERROR:
 				$errmsg = "ERROR:[$errno]<strong>$errstr</strong>File:$errfile:[$errline]";
-				die($errmsg);
+				error($errmsg);
+				break;
+			case E_NOTICE:
+			case E_USER_NOTICE:
+			case E_USER_WARNING:
+			default:
+				$errmsg = "NOTICE:[$errno]<strong>$errstr</strong>File:$errfile:[$errline]";
+				//notice($errmsg);
+				break;
 		}
 	}
 }

@@ -1,7 +1,30 @@
 <?php
 
-function error($msg){
-	echo "<div style='border:solid 2px #3333;width:500px;height:100px;>$msg<div>";
+function error($error){
+	if(C("DEBUG")){
+		if(!is_array($error)){
+			$backtrace = debug_backtrace() ;
+			$e['message'] = $error;
+			$info = '';
+			foreach ($backtrace as $v) {
+				$file = isset($v['file'])?$v['file']:'';
+				$line = isset($v['line'])?"[".$v['line']."]":'';
+				$class = isset($v['class'])?$v['class']:'';
+				$type = isset($v['type'])?$v['type']:'';
+				$function = isset($v['function'])?$v['function']."()":'';
+				$info.=$file.$line.$class.$type.$function."<br/>";
+
+			}
+			$e['info'] = $info;
+			//var_dump($e);
+		}else{
+			$e = $error;
+		}
+	}else{
+		$e['message'] = C("ERROR_MESSAGE");
+	}
+	//echo "<div style='border:solid 2px #3333;width:500px;height:100px;>$msg<div>";
+	include C("DEBUG_TPL");
 	exit();
 }
 
